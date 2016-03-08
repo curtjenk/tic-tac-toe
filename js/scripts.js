@@ -1,5 +1,6 @@
 var player = 1;
 
+// Duh, could have used letters "X" and "O" instead of images!!!
 function setMark(element) {
 	var imgFile;
 	var selected = element.getAttribute('sel');
@@ -17,7 +18,7 @@ function setMark(element) {
 			player = 1;
 		}
 		element.children[0].src = imgFile;
-		document.getElementById('turn').innerHTML = "Player's " + player + " turn.";
+		document.getElementById('turn').innerHTML = "Player " + player + "'s turn.";
 	
    		// ----- check if there is a winner!
    		isGameOver();
@@ -35,7 +36,7 @@ function resetAll()
 		
 	}
 	player = 1;
-	document.getElementById('turn').innerHTML = "Player's " + player + " turn.";
+	document.getElementById('turn').innerHTML = "Player " + player + "'s turn.";
 	document.getElementById('startOverBtn').style.display = "none";
 
 	var winlines = document.getElementsByClassName("winline");
