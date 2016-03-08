@@ -4,9 +4,8 @@ function setMark(element) {
 	var imgFile;
 	var selected = element.getAttribute('sel');
 	//console.dir(element);
-	if (selected !== "o" && selected !=="x")
+	if (selected !== "o" && selected !=="x") //Checks if square is empty
 	{
-		
 		if (player === 1)
 		{
 			imgFile = "img/o.png";
@@ -59,7 +58,7 @@ function isGameOver()
 	                        ['a2', 'b2', 'c2'], 
 	                        ['a3', 'b3', 'c3']
 							];
-							
+
 	var squares = document.getElementsByClassName("square");
 	var exesArr = [];
 	var ohsArr = [];
