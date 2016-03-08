@@ -175,9 +175,113 @@ img{
 	max-height: 98%;
 	
 }
-/*hr{
-	/*border: 5px solid black;*/
-	/*width: 1px;*/
-	/*size: 300px;*/
-	/*background-color: black;*/
-/*}*/*/
+
+/* ---------- styles for the red line through the winning squares ----*/
+
+
+#left-diag{
+	display: none;
+	width: 5px;
+	height: 150%;
+	background-color: red;
+	position: absolute;
+	top: 10%;
+	left: 10%;
+	transform: rotate(-56.5deg);
+	transform-origin: 0% 0%;
+	z-index: 1;
+}
+
+#right-diag {
+	display: none;
+	width: 5px;
+	height: 150%;
+	background-color: red;
+	position: absolute;
+	top: 10%;
+	left: 90%;
+	transform: rotate(56.5deg);
+	transform-origin: 0% 0%;
+	z-index: 1;
+}
+#top-horiz {
+	display: none;
+	width: 5px;
+	height: 130%;
+	background-color: red;
+	position: absolute;
+	top: 18%;
+	left: 8%;
+	transform: rotate(-90deg);
+	transform-origin: 0% 0%;
+	z-index: 1;
+}
+#mid-horiz {
+	display: none;
+	width: 5px;
+	height: 130%;
+	background-color: red;
+	position: absolute;
+	top: 50%;
+	left: 8%;
+	transform: rotate(-90deg);
+	transform-origin: 0% 0%;
+	z-index: 1;
+}
+
+#bottom-horiz {
+	display: none;
+	width: 5px;
+	height: 130%;
+	background-color: red;
+	position: absolute;
+	top: 82%;
+	left: 8%;
+	transform: rotate(-90deg);
+	transform-origin: 0% 0%;
+	z-index: 1;
+}
+#left-vert {
+	display: none;
+	width: 5px;
+	height: 95%;
+	background-color: red;
+	position: absolute;
+	top: 3%;
+	left: 18%;
+	transform: rotate(0 deg);
+	transform-origin: 0% 0%;
+	z-index: 1;
+}
+#mid-vert {
+	display: none;
+	width: 3px;
+	height: 95%;
+	background-color: red;
+	position: absolute;
+	top: 3%;
+	left: 50%;
+	transform: rotate(0 deg);
+	transform-origin: 0% 0%;
+	z-index: 1;
+}
+#right-vert {
+	display: none;
+	width: 3px;
+	height: 95%;
+	background-color: red;
+	position: absolute;
+	top: 3%;
+	left: 82%;
+	transform: rotate(0 deg);
+	transform-origin: 0% 0%;
+	z-index: 1;
+}
+
+
+
+
+
+
+
+

@@ -20,7 +20,7 @@ function setMark(element) {
 		element.children[0].src = imgFile;
 		document.getElementById('turn').innerHTML = "Player's " + player + " turn.";
 	
-   		// ----- now count number of selected to see if game is over
+   		// ----- check if there is a winner!
    		isGameOver();
 	}
 
@@ -38,11 +38,19 @@ function resetAll()
 	player = 1;
 	document.getElementById('turn').innerHTML = "Player's " + player + " turn.";
 	document.getElementById('startOverBtn').style.display = "none";
+
+	var winlines = document.getElementsByClassName("winline");
+	for (var x = 0; x<winlines.length; x++)
+	{
+		winlines[x].style.display = "none";
+	}
 }
+
+
 
 function isGameOver() 
 {
-	var winningPatterns = [ ['a1', 'a2', 'a3'], 
+	var winningPatternsArr = [ ['a1', 'a2', 'a3'], 
 							['b1', 'b2', 'b3'], 
 							['c1', 'c2', 'c3'], 
 	                       	['a1', 'b2', 'c3'], 
@@ -51,10 +59,13 @@ function isGameOver()
 	                        ['a2', 'b2', 'c2'], 
 	                        ['a3', 'b3', 'c3']
 							];
+							
 	var squares = document.getElementsByClassName("square");
 	var exesArr = [];
 	var ohsArr = [];
 	var numSelected = 0;
+	var winningPattern;
+
 	for (var x = 0; x<squares.length; x++)
 	{
 		var sel = squares[x].getAttribute('sel');
@@ -68,28 +79,30 @@ function isGameOver()
 		}
 	}
 	var winner = 0;
-	for (var i=0; i<winningPatterns.length; i++) {
+	for (var i=0; i<winningPatternsArr.length; i++) {
 		var numXHits = 0;
 		var numOHits = 0;
-		for (var x = 0; x<winningPatterns[i].length && winner===0; x++) {
+		for (var x = 0; x<winningPatternsArr[i].length && winner===0; x++) {
 			for (var z =0; z<exesArr.length; z++) {
-				if (winningPatterns[i][x] == exesArr[z]) {
+				if (winningPatternsArr[i][x] == exesArr[z]) {
 					numXHits++;
 				}
 			}
 			for (var z =0; z<ohsArr.length; z++) {
-				if (winningPatterns[i][x] == ohsArr[z]) {
+				if (winningPatternsArr[i][x] == ohsArr[z]) {
 					numOHits++;
 				}
 			}
 			console.log(numXHits);
 			if (numXHits === 3) {
 				winner=2;
-				alert("exes win");
+				winningPattern = winningPatternsArr[i];
+				//alert("exes win");
 			}
 			if (numOHits === 3) {
 				winner=1;
-				alert("ohs win");
+				winningPattern = winningPatternsArr[i];
+				//alert("ohs win");
 			}
 		}
 	}
@@ -97,6 +110,37 @@ function isGameOver()
 	if (winner !== 0) {
 		document.getElementById('turn').innerHTML = "Player " + winner + " won!";
 		document.getElementById('startOverBtn').style.display = "block";
+
+		drawWinLine(winningPattern);
 	}
 
 }
+
+function drawWinLine(winPattern) {
+	if (winPattern[0] === 'a1' && winPattern[1] == 'b1')
+	{ document.getElementById('left-vert').style.display = "block"; }
+	
+	if (winPattern[0] === 'a2' && winPattern[1] == 'b2')
+	{ document.getElementById('mid-vert').style.display = "block"; }
+	
+	if (winPattern[0] === 'a3' && winPattern[1] == 'b3')
+	{ document.getElementById('right-vert').style.display = "block"; }
+	
+	if (winPattern[0] === 'a1' && winPattern[1] == 'a2')
+	{ document.getElementById('top-horiz').style.display = "block"; }
+	
+	if (winPattern[0] === 'b1' && winPattern[1] == 'b2')
+	{ document.getElementById('mid-horiz').style.display = "block"; }
+	
+	if (winPattern[0] === 'c1' && winPattern[1] == 'c2')
+	{ document.getElementById('bottom-horiz').style.display = "block"; }
+	
+	if (winPattern[0] === 'a1' && winPattern[1] == 'b2')
+	{ document.getElementById('left-diag').style.display = "block"; }
+	
+	if (winPattern[0] === 'a3' && winPattern[1] == 'b2')
+	{ document.getElementById('right-diag').style.display = "block"; }
+
+}
+
+

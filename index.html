@@ -11,15 +11,25 @@
 			<h1>TIC TAC TOE</h1>
 		</div>
 		<div class="my-turn">
-			<h2 id="turn">Player's 1 turn</h2>	
+			<h2 id="turn">Player's 1 turn</h2>
 		</div>
 		<button id="startOverBtn" onclick="resetAll()">Play Again?</button>
-
 		<div id="board">
+			
+			<div class="winline" id="left-diag"></div>
+			<div class="winline" id="right-diag"></div>
+			<div class="winline" id="top-horiz"></div>
+			<div class="winline" id="mid-horiz"></div>
+			<div class="winline" id="bottom-horiz"></div>
+			<div class="winline" id="left-vert"></div>
+			<div class="winline" id="mid-vert"></div>
+			<div class="winline" id="right-vert"></div>
+
 			<div class="hline one"></div>
 			<div class="hline two"></div>
 			<div class="vline one"></div>
 			<div class="vline two"></div>
+
 			<div class="row one">
 				<div class="square" id="a1" onclick="setMark(this);">
 					<img src="">
