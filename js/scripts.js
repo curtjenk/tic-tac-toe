@@ -3,16 +3,18 @@ var player = 1;
 function setMark(element) {
 	var imgFile;
 	var selected = element.getAttribute('sel');
-	console.dir(element);
-	if (selected !== "y")
+	//console.dir(element);
+	if (selected !== "o" && selected !=="x")
 	{
-		element.setAttribute('sel', 'y');
+		
 		if (player === 1)
 		{
 			imgFile = "img/o.png";
+			element.setAttribute('sel', 'o');
 			player = 2;
 		} else {
 			imgFile = "img/x.png";
+			element.setAttribute('sel', 'x');
 			player = 1;
 		}
 		element.children[0].src = imgFile;
@@ -38,21 +40,63 @@ function resetAll()
 	document.getElementById('startOverBtn').style.display = "none";
 }
 
-// ----- Not yet ready for primetime. need to figure out if there are 3 in a row versus looking
-// ----- for all squares to be filled.
 function isGameOver() 
 {
+	var winningPatterns = [ ['a1', 'a2', 'a3'], 
+							['b1', 'b2', 'b3'], 
+							['c1', 'c2', 'c3'], 
+	                       	['a1', 'b2', 'c3'], 
+	                       	['a3', 'b2', 'c1'], 
+	                       	['a1', 'b1', 'c1'], 
+	                        ['a2', 'b2', 'c2'], 
+	                        ['a3', 'b3', 'c3']
+							];
 	var squares = document.getElementsByClassName("square");
+	var exesArr = [];
+	var ohsArr = [];
 	var numSelected = 0;
 	for (var x = 0; x<squares.length; x++)
 	{
 		var sel = squares[x].getAttribute('sel');
-		if (sel === 'y') {
-			numSelected++;
+		if (sel === 'x')
+		{
+			// console.log("adding x");
+			exesArr.push(squares[x].getAttribute('id'));
+		} else if (sel === 'o') {
+			// console.log("adding o");
+			ohsArr.push(squares[x].getAttribute('id'));
 		}
 	}
-	if (numSelected === 9) {
-		document.getElementById('startOverBtn').style.display = "block";
-		document.getElementById('turn').innerHTML = "Game Over";
+	var winner = 0;
+	for (var i=0; i<winningPatterns.length; i++) {
+		var numXHits = 0;
+		var numOHits = 0;
+		for (var x = 0; x<winningPatterns[i].length && winner===0; x++) {
+			for (var z =0; z<exesArr.length; z++) {
+				if (winningPatterns[i][x] == exesArr[z]) {
+					numXHits++;
+				}
+			}
+			for (var z =0; z<ohsArr.length; z++) {
+				if (winningPatterns[i][x] == ohsArr[z]) {
+					numOHits++;
+				}
+			}
+			console.log(numXHits);
+			if (numXHits === 3) {
+				winner=2;
+				alert("exes win");
+			}
+			if (numOHits === 3) {
+				winner=1;
+				alert("ohs win");
+			}
+		}
 	}
+	
+	if (winner !== 0) {
+		document.getElementById('turn').innerHTML = "Player " + winner + " won!";
+		document.getElementById('startOverBtn').style.display = "block";
+	}
+
 }
